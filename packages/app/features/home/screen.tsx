@@ -1,98 +1,99 @@
 import {
-  Anchor,
-  Button,
-  H1,
-  Paragraph,
-  Separator,
-  Sheet,
-  useToastController,
-  XStack,
-  YStack,
-} from '@my/ui'
-import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
+  YStack, XStack, Image, ScrollView,Text
+} from 'tamagui'
 import React, { useState } from 'react'
-import { useLink } from 'solito/link'
+import Avatar from '@my/ui/src/components/Avatar'
+import Title from '@my/ui/src/components/Title'
+import ButtonComponent from '@my/ui/src/components/ButtonComponent'
+import RoundedButton from '@my/ui/src/components/RoundedButton'
+import PrimoCard from '@my/ui/src/components/PrimoCard'
+import { useRouter } from 'solito/router'
+// import {router} from "expo-router"
 
 export function HomeScreen() {
-  const linkProps = useLink({
-    href: '/user/nate',
-  })
+
+  const router = useRouter()
 
   return (
-    <YStack f={1} jc="center" ai="center" p="$4" space>
-      <YStack space="$4" maw={600}>
-        <H1 ta="center">Welcome to Tamagui.</H1>
-        <Paragraph ta="center">
-          Here's a basic starter to show navigating from one screen to another. This screen uses the
-          same code on Next.js and React Native.
-        </Paragraph>
-
-        <Separator />
-        <Paragraph ta="center">
-          Made by{' '}
-          <Anchor color="$color12" href="https://twitter.com/natebirdman" target="_blank">
-            @natebirdman
-          </Anchor>
-          ,{' '}
-          <Anchor
-            color="$color12"
-            href="https://github.com/tamagui/tamagui"
-            target="_blank"
-            rel="noreferrer"
-          >
-            give it a ⭐️
-          </Anchor>
-        </Paragraph>
-      </YStack>
-
-      <XStack>
-        <Button {...linkProps}>Link to user</Button>
+    <YStack gap={30}>
+      {/*  
+        * HEADER
+        */}
+      <XStack justifyContent='center' alignItems='center' gap={50}>
+        <Avatar uri={"https://images.unsplash.com/photo-1697644371824-41d4d0a8a12f?auto=format&fit=crop&q=80&w=1471&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"} />
+        <Title text={"Hello world"} color={"green"} last={"red"} />
       </XStack>
 
-      <SheetDemo />
-    </YStack>
-  )
-}
+        {/*  
+        * PRES
+        */}
 
-function SheetDemo() {
-  const [open, setOpen] = useState(false)
-  const [position, setPosition] = useState(0)
-  const toast = useToastController()
-
-  return (
-    <>
-      <Button
-        size="$6"
-        icon={open ? ChevronDown : ChevronUp}
-        circular
-        onPress={() => setOpen((x) => !x)}
-      />
-      <Sheet
-        modal
-        animation="medium"
-        open={open}
-        onOpenChange={setOpen}
-        snapPoints={[80]}
-        position={position}
-        onPositionChange={setPosition}
-        dismissOnSnapToBottom
-      >
-        <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
-        <Sheet.Frame ai="center" jc="center">
-          <Sheet.Handle />
-          <Button
-            size="$6"
-            circular
-            icon={ChevronDown}
-            onPress={() => {
-              setOpen(false)
-              toast.show('Sheet closed!', {
-                message: 'Just showing how toast works...',
-              })
+       <XStack justifyContent='space-around' alignItems='center' gap={50}>
+        <ButtonComponent text={"Présentation"} color={"green"} />
+        <Image 
+            source={{
+                uri: "https://images.unsplash.com/photo-1697506788707-53f5b1a1f1f3?auto=format&fit=crop&q=80&w=2264&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }}
+            width={500}
+            height={500}
+            borderRadius={50}
+
           />
-        </Sheet.Frame>
-      </Sheet>
-    </>
+        </XStack>
+
+
+        {/*  
+        * NAV
+        */}
+
+        <XStack justifyContent='space-around' alignItems='center' gap={50}>
+          <RoundedButton 
+            uri={"https://images.unsplash.com/photo-1696356893459-9de3a12ecb62?auto=format&fit=crop&q=80&w=2187&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+            width={110}
+            height={110}
+            borderRadius={129}
+            label={"Réseau"}
+            onPress={() => router.push('/reseau')}
+          />
+          <RoundedButton 
+            uri={"https://images.unsplash.com/photo-1696356893459-9de3a12ecb62?auto=format&fit=crop&q=80&w=2187&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+            width={110}
+            height={110}
+            borderRadius={129}
+            label={"Annuaire"}
+          />
+          <RoundedButton 
+            uri={"https://images.unsplash.com/photo-1696356893459-9de3a12ecb62?auto=format&fit=crop&q=80&w=2187&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+            width={110}
+            height={110}
+            borderRadius={129}
+            label={"Abonnement"}
+          />
+        </XStack>
+
+
+         {/*  
+        * CARDS
+        */}
+
+
+        <YStack gap={30}>
+          <Text fontWeight={"bold"} fontSize={30}>Mes demandes</Text>
+          <ScrollView horizontal >
+            <PrimoCard 
+              uri={"https://images.unsplash.com/photo-1696962678565-bee84e6b9cb6?auto=format&fit=crop&q=80&w=2160&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              />
+            <PrimoCard 
+              uri={"https://images.unsplash.com/photo-1696962678565-bee84e6b9cb6?auto=format&fit=crop&q=80&w=2160&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              />
+            <PrimoCard 
+              uri={"https://images.unsplash.com/photo-1696962678565-bee84e6b9cb6?auto=format&fit=crop&q=80&w=2160&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+              />
+          </ScrollView>
+        </YStack>
+
+
+
+    </YStack>
   )
 }

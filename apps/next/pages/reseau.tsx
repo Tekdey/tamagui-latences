@@ -1,13 +1,13 @@
-import { UserDetailScreen } from 'app/features/user/detail-screen'
+import ReseauScreen from 'app/features/reseau/screen'
 import Head from 'next/head'
 
 export default function Page() {
   return (
     <>
       <Head>
-        <title>User</title>
+        <title>Home</title>
       </Head>
-      <UserDetailScreen />
+      <ReseauScreen />
     </>
   )
 }
